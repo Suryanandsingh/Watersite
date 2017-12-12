@@ -1,0 +1,34 @@
+{% extends 'water/home.html' %}
+{% load staticfiles %}
+{% block body %}
+    <style>
+        body{
+            background: url("{% static 'img/Water0003.jpg' %}");
+            background-size: cover;
+        }
+    </style>
+<img  src="{{ details.brand_logo }}" style="width: 300px; height: 300px ;" align="left" ; hspace= "30" ;  >
+
+<h1 style="color: #008dde ">   {{ details.brand }}</h1>
+<form method="POST">{% csrf_token %}
+    <td>
+    <label style="color: midnightblue ; font-size: 18px" for="Size" >Size (ltr)</label>
+    <select name="dropdown1">
+        {% for quality in details.quality_set.all %}
+            <option value="{{ quality.size }}">{{ quality.size }}</option>
+        {% endfor %}
+    </select>
+    </td>
+    <input type="submit" value="Get Price">
+</form>
+    <br><br>
+<form>
+    <label style="color: midnightblue ; font-size: 18px" for="Pincode" >Pincode</label>
+    <select name="Pincode">
+        {% for pin in pin %}
+            <option value="{{ pin.pin_code }}">{{ pin.pin_code }}</option>
+        {% endfor %}
+    </select>
+</form>
+<p><a href="{% url 'water:profile' %}" class="btn btn-primary" role="button">BuyNow</a> </p>
+{% endblock %}

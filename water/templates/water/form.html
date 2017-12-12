@@ -1,0 +1,87 @@
+{% block body %}
+
+    <title>login</title>
+    {% load staticfiles %}
+
+    <style type="text/css">
+        body{
+            background: url('{% static "img/tropical-beach-background-22.jpg" %}') no-repeat center center fixed;
+
+            background-size: cover;
+
+        }
+        .log{
+            height: 330px;
+            width: 240px;
+            background-color: rgba(0,0,0,0.4);
+            margin: 0 auto;
+            margin-top: 50px;
+            padding-left: 30px;
+            padding-right: 40px;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            color: #f9f9f9;
+            font-weight: bold;
+            box-shadow: inset -5px -5px rgba(0,0,0,0.5);
+        }
+    .log input[type="text"]{
+        width: 250px;
+        height: 40px;
+        border: 0;
+        padding-left: 15px;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+    }
+        .log input[type="password"]{
+        width: 250px;
+        height: 40px;
+        border: 0;
+        padding-left: 15px;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+    }
+        .log button[type="submit"]{
+            width: 80px;
+            height: 35px;
+            margin: 20px;
+            border-radius: 7px;
+            background-color: darkgreen;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            font-weight: bold;
+        }
+        .log input[type="button"]{
+            width: 80px;
+            height: 35px;
+            margin: 20px;
+            border-radius: 7px;
+            background-color: red;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            font-weight: bold;
+        }
+    </style>
+
+<body>
+
+    {% if form.non_field_errors %}
+    <ul class='form-errors'>
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="log">
+        <h1>Login</h1>
+		<form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">login</button>
+            <span class="psw">For<a href="{% url 'water:signup' %}" style="color: red">SignUp</a> </span><br>
+        </form>
+        <input type=button value="back" onClick="javascript:history.go(-1);">
+    </div>
+</body>
+{% endblock %}
