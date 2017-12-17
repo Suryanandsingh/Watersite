@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate,get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import UserProfile
 
 User=get_user_model()
@@ -23,33 +23,23 @@ class LoginForm(forms.Form):
         user = authenticate(username=username, password=password)
         return user
 
+class MyRegistrationForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(
+                attrs={'class': 'form-control'}
+                ), required=True, max_length=30)
+    email = forms.CharField(widget=forms.EmailInput(
+            attrs={'class': 'form-control'}
+            ), required=True, max_length=30)
+    password = forms.CharField(widget=forms.PasswordInput(
+                attrs={'class': 'form-control'}
+                ), required=True, min_length=8)
+    confrm_password = forms.CharField(widget=forms.PasswordInput(
+                     attrs={'class': 'form-control'}
+                    ), required=True, min_length=8)
 
-
-#for Registration Form with UserCreationForm class which is import above
-class MyRegistrationForm(UserCreationForm):
-    #for email field
-    email = forms.EmailField(required=True)
-    password1 = forms.CharField(widget=forms.PasswordInput,
-                                 label='new password',
-                                 )
-    password2 = forms.CharField(widget=forms.PasswordInput,
-                                 label='Re-enter password',
-                                )
-    #for field choose you want
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
-
-    #save from post(commit) in database
-    
-    def save(self, commit=True):
-        #super-
-        user = super(MyRegistrationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        if commit:
-            user.save()
-        return user
-
+        fields = ['username', 'email', 'password']
 
 class UserProfileForm(forms.ModelForm):
 
@@ -73,4 +63,17 @@ class UserProfileForm(forms.ModelForm):
             raise ValidationError("Not available")
         return pin_code
     '''
+class EditProfile(UserChangeForm):
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'Name',
+            'address',
+            'city',
+            'state',
+            'pin_code',
+            'mobile_no',
+            'password',
+        )
         

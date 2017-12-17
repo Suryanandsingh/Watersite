@@ -5,9 +5,9 @@ from django.http import HttpResponseRedirect #for return particular page
 from django.shortcuts import render, redirect #for go to html page
 from .models import Brand, ZipCode, Quality
 from django.db.models import Q  #for query search
-from .form import LoginForm,  MyRegistrationForm , UserProfileForm#for login or RegisterForm
+from .form import LoginForm,  MyRegistrationForm , UserProfileForm, EditProfile#for login or RegisterForm
 from django.contrib.auth.decorators import login_required #for log in require
-
+from django.contrib.auth.forms import UserChangeForm
 
 User=get_user_model()
 
@@ -50,27 +50,29 @@ def login_view(request):
         user = form.login(request)
         if user:
             login(request, user)
-            return HttpResponseRedirect('/water')# Redirect to a success page.
+            return redirect('/water')# Redirect to a success page.
     return render(request, 'water/form.html', {'form': form })
 
 
 
 #for registration
 def Register_View(request):
+    if request.method == 'POST':
+        form = MyRegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            User.objects.create_user(username=username, email=email, password=password)
+            return redirect('/water/login')
+    else:
+        form = MyRegistrationForm()
 
-        if request.method == 'POST': #for post data
-            form = MyRegistrationForm(request.POST) #your post data into tha form
-            if form.is_valid(): #validation your data
-                form.save() #save data
-                register_success = "Account successfully created!"
-            return HttpResponseRedirect('/water/login')#return your index page directly
-        else:
-            form = MyRegistrationForm()  # An unbound form
-        #return registration form with the dict form
-        return render(request, 'water/registration_form.html', {'form':form})
+    return render(request, 'water/registration_form.html', {'form':form})
 
-#user profile information
+
 @login_required(login_url='/water/login/') #check if user login or not if not then go to login page
+# @transaction.atomic
 def user_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=request.user.profile)
@@ -79,8 +81,7 @@ def user_profile(request):
             return HttpResponseRedirect('/water')
     else:
         user = request.user
-        profile = user.profile
-        form = UserProfileForm(instance=profile)
+        form = UserProfileForm(instance=request.user.profile)
 
     return render(request, 'water/profile.html', {'form':form})
 
@@ -94,8 +95,26 @@ def Pincode(request):
 
 
 
+def account(request):
+    # user = UserProfileForm.objects.all()
+    # args = {'user':user}
+    if request.method =='POST':
+        form = UserProfileForm(request.POST)
+        print(form.cleaned_data['address'])
+        # print(user.profile.address)
+    return render(request, 'water/user_profile_details.html')
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfile(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/water/account/')
+    else:
+        form = EditProfile(instance=request.user)
+        return render(request, 'water/edit_profile.html', {"form":form})
 
 
 def logoutView(request):
     logout(request)
-    return redirect("/water")
+    return redirect("/water/")

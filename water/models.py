@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import  User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Brand(models.Model):
     brand = models.CharField(max_length=100)
-    brand_logo = models.CharField(max_length=300)
+    brand_logo = models.FileField()
 
     def __str__(self):
         return self.brand
@@ -25,7 +27,7 @@ class ZipCode(models.Model):
         return self.pin_code
         
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     Name = models.CharField(max_length=100, null=True)
     address = models.CharField(max_length=300, null=True)
     city = models.CharField(max_length=50, null=True)
@@ -36,6 +38,5 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])    
-        
-        
+
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
