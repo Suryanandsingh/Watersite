@@ -1,0 +1,31 @@
+{% extends 'water/profile_navbar.html'%}
+{% block body %}
+    <div class="profile">
+        <h1 style="color: blue;">Profile Details of {{ user.profile.Name }}</h1>
+        <p>
+            <label>{{ user }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.Name }}</label>
+        </p>
+        <p>
+            <label>{{ user.email }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.mobile_no }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.address }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.city }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.state }}</label>
+        </p>
+        <p>
+            <label>{{ user.profile.pin_code }}</label>
+        </p>
+
+    </div>
+{% endblock %}

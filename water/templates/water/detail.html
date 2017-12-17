@@ -7,7 +7,7 @@
             background-size: cover;
         }
     </style>
-<img  src="{{ details.brand_logo }}" style="width: 300px; height: 300px ;" align="left" ; hspace= "30" ;  >
+<img  src="{{ details.brand_logo.url }}" style="width: 300px; height: 300px ;" align="left" ; hspace= "30" ;  >
 
 <h1 style="color: #008dde ">   {{ details.brand }}</h1>
 <form method="POST">{% csrf_token %}

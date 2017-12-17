@@ -7,83 +7,33 @@
 
             background-size: cover;
         }
-        .sign {
-            width: 330px;
-            height: 400px;
-            margin: 0 auto;
-            background-color: rgba(0,0,0,0.4);
-            margin-top: 90px;
-            padding-left: 40px;
-            padding-right: -10px;
-            border-radius: 15px;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            color:wheat;
-            font-style: italic;
-            box-shadow: inset -5px -8px rgba(0,0,0,0.5);
-        }
-        .sign input[type="text"]{
-            width: 230px;
-            height: 39px;
-            padding-left: 15px;
-            border-radius: 10px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-        }
-        .sign input[type="email"]{
-            width: 230px;
-            height: 39px;
-            padding-left: 15px;
-            border-radius: 10px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-        }
-        .sign input[type="password"]{
-            width: 230px;
-            height: 39px;
-            padding-left: 15px;
-            border-radius: 10px;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-        }
-        .sign button[type="submit"]{
-            width: 80px;
-            height: 40px;
-            margin: 50px;
-            padding-left: 5px;
-            border-radius: 7px;
-            background-color: #2e6da4;
-            font-style: oblique;
-            color: yellow ;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-        }
-        .sign input[type="button"]{
-            width: 80px;
-            height: 40px;
-            margin: 50px;
-            padding-left: 5px;
-            border-radius: 7px;
-            background-color:red;
-            font-style: oblique;
-            color: black ;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-        }
-
     </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_sign.css' %}">
+    <!--<script  src="{% static 'js/sign.js' %}"></script>-->
 
 <body>
     <div class="sign">
-        <h1>SignUp</h1>
-        <form   action="." method="post" enctype="multipart/form-data">
+        <h1 ><a href="{% url 'water:index' %}" style="color:red; margin: 0px auto 0px auto;"> Water World</a></h1>
+
+        <form method="post">
+            <h1>SignUp</h1>
             {% csrf_token %}
-        <table border="0" style="color: yellow">
-            {{ form.as_table }}
-        </table>-->
-        <button type="submit" class="btn btn-success" >SignUp</button>
-            <input type=button value="back" onClick="javascript:history.go(-1);">
-        </form>
+            <p>
+                <input type="text" name="username" placeholder="username">
+            </p>
+            <p>
+                <input type="text" name="email" placeholder="email">
+            </p>
+            <p>
+                <input type="text" name="password" placeholder="password">
+            </p>
+            <p>
+                <input type="password" name="cnfrm_password" placeholder="confirm_password">
+            </p>
+		<p>
+			<input type="submit" value="Create My Account" id="submit">
+		</p>
+	</form>
     </div>
 </body>
 {% endblock %}

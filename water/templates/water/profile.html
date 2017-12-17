@@ -50,7 +50,7 @@
     <div class="buy">
         <h1 align="center" style="color: blue">Information</h1>
         <form method="post">{% csrf_token %}
-            {{ form.as_ul }}
+            {{ form.as_p }}
             <button type="submit">confirm</button>
             <input type=button value="back" onClick="javascript:history.go(-1);">
         </form>

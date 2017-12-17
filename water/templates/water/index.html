@@ -79,7 +79,9 @@
         <div class="column">
             <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
-                    <img   style="width: 200px; height: 200px ; " src="{{ watr.brand_logo }}" alt="{{ watr.brand }}"  >
+                    <a href="{% url 'water:detail' watr.id %}">
+                    <img   style="width: 200px; height: 200px ; " src="{{ watr.brand_logo.url }}" alt="{{ watr.brand }}" >
+                    </a>
                     <div class="caption">
                         <h1><a href="{% url 'water:detail' watr.id %}">{{ watr.brand }} </a> </h1>
                         <p><a href="{% url 'water:detail' watr.id %}" class="btn btn-primary" role="button">View Detail</a></p>
