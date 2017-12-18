@@ -7,7 +7,8 @@ from .models import Brand, ZipCode, Quality
 from django.db.models import Q  #for query search
 from .form import LoginForm,  MyRegistrationForm , UserProfileForm, EditProfile#for login or RegisterForm
 from django.contrib.auth.decorators import login_required #for log in require
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 User=get_user_model()
 
@@ -51,6 +52,7 @@ def login_view(request):
         if user:
             login(request, user)
             return redirect('/water')# Redirect to a success page.
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     return render(request, 'water/form.html', {'form': form })
 
 
@@ -112,7 +114,19 @@ def edit_profile(request):
             return redirect('/water/account/')
     else:
         form = EditProfile(instance=request.user)
-        return render(request, 'water/edit_profile.html', {"form":form})
+    return render(request, 'water/edit_profile.html', {"form":form})
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/water/account/')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'water/change_password.html', {"form":form})
 
 
 def logoutView(request):

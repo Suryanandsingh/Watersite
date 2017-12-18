@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^signup/$',views.Register_View, name='signup'),#for signup
     url(r'^profile/$', views.user_profile, name='profile'),
     url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
+    url(r'^profile/change_password/$', views.change_password, name='change_password'),
     url(r'^account', views.account, name='account'),
     url(r'^waterworld/$', views.logoutView, name='logout'),
     url(r'^Pincode/$', views.Pincode, name='Pincode'),
