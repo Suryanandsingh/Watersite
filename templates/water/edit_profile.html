@@ -1,0 +1,11 @@
+{% extends 'water/profile_navbar.html' %}
+{% block body %}
+<div class="profile">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

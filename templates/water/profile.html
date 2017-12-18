@@ -1,0 +1,60 @@
+
+{% block body %}
+
+<title>BuyNow</title>
+    <style type="text/css">
+        .buy{
+            height: 600px;
+            width: 500px;
+            background-color: cadetblue;
+            margin: 0 auto;
+            margin-top: 50px;
+            border-radius: 20px;
+            -webkit-border-radius:20px ;
+            -moz-border-radius: 20px;
+        }
+        .buy input[type="text"]{
+            width: 250px;
+            height: 40px;
+            border: 0;
+            margin: 12px;
+            margin-left: 70px;
+            padding-left: 15px;
+            border-radius: 15px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+        }
+        .buy button[type="submit"]
+        {
+            height:40px;
+            width: 80px;
+            margin: 40px;
+            border-radius: 7px;
+            background-color: #4cae4c;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            font-weight: bold;
+        }
+        .buy input[type="button"]
+        {
+            height:40px;
+            width: 80px;
+            border-radius: 7px;
+            background-color: darkred;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            font-weight: bold;
+        }
+    </style>
+<body>
+    <div class="buy">
+        <h1 align="center" style="color: blue">Information</h1>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">confirm</button>
+            <input type=button value="back" onClick="javascript:history.go(-1);">
+        </form>
+    </div>
+</body>
+
+{% endblock %}
