@@ -1,5 +1,8 @@
 {% block body %}
     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'water/style.css' %}">
+	  <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+
     <title>SignUp</title>
     <style>
         body{
@@ -7,33 +10,19 @@
 
             background-size: cover;
         }
-    </style>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style_sign.css' %}">
-    <!--<script  src="{% static 'js/sign.js' %}"></script>-->
+        </style>
 
 <body>
-    <div class="sign">
-        <h1 ><a href="{% url 'water:index' %}" style="color:red; margin: 0px auto 0px auto;"> Water World</a></h1>
+<div class="wrapper">
+    <h1><a style="color: white; margin-left: 550px;" href="{% url 'water:index' %}">WaterWorld</a></h1>
+    <form class="form-signin" method="post">
 
-        <form method="post">
-            <h1>SignUp</h1>
-            {% csrf_token %}
-            <p>
-                <input type="text" name="username" placeholder="username">
-            </p>
-            <p>
-                <input type="text" name="email" placeholder="email">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="password">
-            </p>
-            <p>
-                <input type="password" name="cnfrm_password" placeholder="confirm_password">
-            </p>
-		<p>
-			<input type="submit" value="Create My Account" id="submit">
-		</p>
-	</form>
-    </div>
-</body>
+      <h2 class="form-signin-heading">SignUp</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Registration</button>
+    </form>
+  </div>
+
+	</body>
 {% endblock %}

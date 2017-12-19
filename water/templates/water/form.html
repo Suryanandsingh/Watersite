@@ -2,6 +2,8 @@
 
     <title>login</title>
     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'water/style.css' %}">
+    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
 
     <style type="text/css">
         body{
@@ -11,9 +13,6 @@
 
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style_sign.css' %}">
-    <!--<script  src="{% static 'js/sign.js' %}"></script>-->
-
 <body>
 
     {% if form.non_field_errors %}
@@ -23,25 +22,17 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <div>
-
-        <form method="post">
-            <h1>Login</h1>
-            {% csrf_token %}
-            <!--{{ form.as_p }}-->
-            <p>
-                <input type="text" name="username" placeholder="username">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="password">
-            </p>
-            <p>
-                <input type="submit" value="Join us" id="submit">
-            </p>
-            <p style="font-size: 16px; color: red;">For registration
-                <a href="{% url 'water:signup' %}">sing up</a>
-            </p>
-	</form>
-    </div>
+    <div class="wrapper">
+    <h1><a style="color: white; margin-left: 550px;" href="{% url 'water:index' %}">WaterWorld</a></h1>
+    <form class="form-signin" method="post">
+      <h2 class="form-signin-heading" >LogIn</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p style="margin-top: 15px; margin-left: 130px; color: blue;">For Join Us
+            <a href="{% url 'water:signup' %}" style="color: red">Join us</a>
+        </p>
+    </form>
+  </div>
 </body>
 {% endblock %}
