@@ -1,14 +1,18 @@
 from django import forms
 from django.contrib.auth import authenticate,get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import  UserChangeForm
 from .models import UserProfile
 from django.core.validators import validate_email
 
 User=get_user_model()
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=255, required=True)
-    password = forms.CharField(widget=forms.PasswordInput, required=True)
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder':'username'}
+        ), required=True, max_length=30)
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder':'password'}
+        ), required=True, min_length=8)
 
     def clean(self):
         username = self.cleaned_data.get('username')
@@ -26,16 +30,16 @@ class LoginForm(forms.Form):
 
 class MyRegistrationForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(
-                attrs={'class': 'form-control'}
+                attrs={'class': 'form-control', 'placeholder':'username'}
                 ), required=True, max_length=30)
     email = forms.CharField(widget=forms.EmailInput(
-            attrs={'class': 'form-control'}
+            attrs={'class': 'form-control', 'placeholder':'email'}
             ), required=True, max_length=30)
     password = forms.CharField(widget=forms.PasswordInput(
-                attrs={'class': 'form-control'}
+                attrs={'class': 'form-control', 'placeholder': 'password'}
                 ), required=True, min_length=8)
-    confrm_password = forms.CharField(widget=forms.PasswordInput(
-                     attrs={'class': 'form-control'}
+    confirm_password = forms.CharField(widget=forms.PasswordInput(
+                     attrs={'class': 'form-control', 'placeholder': 'confirm password'}
                     ), required=True, min_length=8)
 
     class Meta:
@@ -55,7 +59,7 @@ class MyRegistrationForm(forms.ModelForm):
         return email
     def clean_confrm_password(self):
         password = self.cleaned_data['password']
-        confrm_password = self.cleaned_data['confrm_password']
+        confrm_password = self.cleaned_data['confirm_password']
         if password and confrm_password:
             if password != confrm_password:
                 raise forms.ValidationError("password did not match")
