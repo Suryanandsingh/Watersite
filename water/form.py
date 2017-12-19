@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate,get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import UserProfile
+from django.core.validators import validate_email
 
 User=get_user_model()
 
@@ -40,6 +41,28 @@ class MyRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.cleaned_data['username']
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Email addresses must be unique.')
+        try:
+            check_email = validate_email(email)
+        except:
+            raise forms.ValidationError("Email is not correct format")
+        return email
+    def clean_confrm_password(self):
+        password = self.cleaned_data['password']
+        confrm_password = self.cleaned_data['confrm_password']
+        if password and confrm_password:
+            if password != confrm_password:
+                raise forms.ValidationError("password did not match")
+
+
+
+
 
 class UserProfileForm(forms.ModelForm):
 
