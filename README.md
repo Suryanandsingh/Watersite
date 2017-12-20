@@ -1,6 +1,6 @@
 # WaterWorld
 
-e-commercial site for selling branded water.
+## e-commercial site for selling branded water.
 
 ### Home page with search box, Contect us and logIn
 
@@ -22,4 +22,10 @@ If not login then after hit buynow you will directly go on login page.
 There is one condition for login, If you are not register in that website so, cann't login.therefore first register.
 
 ![screenshot from 2017-12-20 11-00-52](https://user-images.githubusercontent.com/27296935/34193521-36b6f95c-e57a-11e7-8d08-cd70c2e8fb92.png)
+
+
+you want to view your profile as well as edit profile and change your password then go top right cornor of home page.
+
+
+![screenshot from 2017-12-20 14-31-57](https://user-images.githubusercontent.com/27296935/34199262-39895af8-e593-11e7-81cd-0f2b89a0a305.png)
 
