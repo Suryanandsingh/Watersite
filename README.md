@@ -6,7 +6,7 @@ e-commercial site for selling branded water.
 
 ![screenshot from 2017-12-20 11-00-07](https://user-images.githubusercontent.com/27296935/34192911-d1468cde-e576-11e7-9896-35ded47cf7e6.png)
 
-In home page, Many branded companies water for buy, and each company water buttol have some details here details means you choose own appropriate size as well as your address.
+In home page, Many branded companies water for buy, and each company water bottle have some details here details means you choose own appropriate size as well as your address.
 
 ![screenshot from 2017-12-20 11-00-34](https://user-images.githubusercontent.com/27296935/34193175-55bad852-e578-11e7-86c0-5c188cee2a11.png)
 
