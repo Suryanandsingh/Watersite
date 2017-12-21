@@ -2,6 +2,8 @@
 
 ## e-commercial site for selling branded water.
 
+For run : localhost/water
+
 ### Home page with search box, Contect us and logIn
 
 ![screenshot from 2017-12-20 11-00-07](https://user-images.githubusercontent.com/27296935/34192911-d1468cde-e576-11e7-9896-35ded47cf7e6.png)
